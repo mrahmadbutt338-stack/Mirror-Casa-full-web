@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export default function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/92XXXXXXXXXX"
+      href="https://wa.me/923223624954?text=Hello%20Mirror%20Casa!%20I'm%20visiting%20your%20website%20and%20would%20like%20to%20enquire%20about%20your%20premium%20mirrors."
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-8 right-8 z-50"

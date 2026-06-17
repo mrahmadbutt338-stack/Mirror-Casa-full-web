@@ -1,34 +1,137 @@
 @import "tailwindcss";
 
-:root {
-  --color-background: #ffffff;
-  --color-foreground: #0a0a0a;
-  --color-primary: #3b82f6;
-  --color-primary-foreground: #ffffff;
-  --color-secondary: #1e40af;
+html {
+  font-size: 13.5px;
 }
 
-.dark {
-  --color-background: #0a0a0a;
-  --color-foreground: #ededed;
+/* ── Dark Mode (default) ── */
+:root {
+  --bg-primary:    #0a0a14;
+  --bg-secondary:  #0f0f1f;
+  --bg-card:       #141428;
+  --bg-card-hover: #1a1a32;
+  --border-color:  rgba(100, 100, 180, 0.18);
+  --text-primary:  #f1f5f9;
+  --text-secondary:#94a3b8;
+  --text-muted:    #64748b;
+  --nav-bg:        rgba(10, 10, 20, 0.92);
+  --footer-bg:     #050510;
+}
+
+/* ── Light Mode ── */
+.light {
+  --bg-primary:    #f8f5ff;
+  --bg-secondary:  #f0ebff;
+  --bg-card:       #ffffff;
+  --bg-card-hover: #f5f0ff;
+  --border-color:  rgba(139, 92, 246, 0.2);
+  --text-primary:  #1e1333;
+  --text-secondary:#4c3d7a;
+  --text-muted:    #7c6fa0;
+  --nav-bg:        rgba(248, 245, 255, 0.95);
+  --footer-bg:     #ede8ff;
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-foreground);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-poppins);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-playfair-display);
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+/* ── Light Mode Page Overrides ── */
+.light .page-bg {
+  background: linear-gradient(135deg, #f8f5ff 0%, #ede8ff 40%, #f0ebff 100%) !important;
 }
 
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.light section {
+  background-color: transparent !important;
+}
+
+/* Cards in light mode */
+.light .card-dark {
+  background: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 4px 24px rgba(139, 92, 246, 0.08);
+}
+
+/* Navbar light */
+.light nav {
+  color: var(--text-primary) !important;
+}
+
+/* Text overrides for light mode */
+.light .text-slate-300,
+.light .text-slate-200 {
+  color: var(--text-secondary) !important;
+}
+
+.light .text-slate-400,
+.light .text-slate-500,
+.light .text-slate-600 {
+  color: var(--text-muted) !important;
+}
+
+.light .text-white {
+  color: var(--text-primary) !important;
+}
+
+/* Backgrounds in light mode */
+.light .bg-slate-950,
+.light .bg-slate-900 {
+  background-color: var(--bg-secondary) !important;
+}
+
+.light .bg-slate-800\/50,
+.light .bg-slate-800\/70,
+.light .bg-slate-800\/80,
+.light .bg-slate-900\/80,
+.light .bg-slate-900\/30 {
+  background-color: rgba(255,255,255,0.8) !important;
+}
+
+/* Borders in light mode */
+.light .border-slate-700\/50,
+.light .border-slate-700 {
+  border-color: var(--border-color) !important;
+}
+
+/* Footer in light */
+.light footer {
+  background-color: var(--footer-bg) !important;
+  border-top-color: rgba(139, 92, 246, 0.15) !important;
+}
+
+/* Form inputs in light mode */
+.light input,
+.light textarea,
+.light select {
+  background-color: rgba(139, 92, 246, 0.06) !important;
+  border-color: rgba(139, 92, 246, 0.25) !important;
+  color: var(--text-primary) !important;
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* Mobile menu light */
+.light .bg-slate-900\/95 {
+  background-color: rgba(248, 245, 255, 0.97) !important;
+}
+
+/* Scrollbar */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Ensure all buttons and links have a pointer cursor */
+button,
+[role="button"],
+a {
+  cursor: pointer;
 }

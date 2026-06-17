@@ -21,7 +21,7 @@ export default function Contact() {
     setSubmitStatus('idle');
 
     try {
-      const res = await fetch('http://localhost:5000/api/contact', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -50,10 +50,10 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h1 className="text-4xl md:text-6xl font-black mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
               Contact Us
             </h1>
-            <p className="text-slate-400 text-xl">Get in touch with us today</p>
+            <p className="text-slate-400 text-lg">Get in touch with us today</p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12">
@@ -62,46 +62,54 @@ export default function Contact() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              <h2 className="text-3xl font-black mb-10 text-white">Get In Touch</h2>
+              <h2 className="text-2xl font-black mb-8 text-white">Get In Touch</h2>
 
               <div className="space-y-8">
-                <div className="flex items-start space-x-6 p-6 rounded-3xl bg-slate-800/50 border border-slate-700/50">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white shrink-0">
+                <div className="flex items-start space-x-4 p-5 rounded-2xl bg-slate-800/50 border border-slate-700/50">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white shrink-0">
                     <MapPin className="w-8 h-8" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-white">Address</h3>
-                    <p className="text-slate-400 text-lg">Your City, Area, Street Name</p>
+                    <h3 className="text-base font-bold mb-1 text-white">Address</h3>
+                    <p className="text-slate-400 text-sm">Model Town, Lahore Cantt, Lahore, Pakistan</p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-6 p-6 rounded-3xl bg-slate-800/50 border border-slate-700/50">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white shrink-0">
+                <div className="flex items-start space-x-4 p-5 rounded-2xl bg-slate-800/50 border border-slate-700/50">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white shrink-0">
                     <Mail className="w-8 h-8" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-white">Email</h3>
-                    <p className="text-slate-400 text-lg">youremail@gmail.com</p>
+                    <h3 className="text-base font-bold mb-1 text-white">Email</h3>
+                    <p className="text-slate-400 text-sm">
+                      <a href="mailto:mrahmadbutt338@gmail.com" className="hover:text-purple-400 transition-colors">
+                        mrahmadbutt338@gmail.com
+                      </a>
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-6 p-6 rounded-3xl bg-slate-800/50 border border-slate-700/50">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white shrink-0">
+                <div className="flex items-start space-x-4 p-5 rounded-2xl bg-slate-800/50 border border-slate-700/50">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white shrink-0">
                     <Phone className="w-8 h-8" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-white">Phone / WhatsApp</h3>
-                    <p className="text-slate-400 text-lg">+92 XXXXXXXXXX</p>
+                    <h3 className="text-base font-bold mb-1 text-white">Phone / WhatsApp</h3>
+                    <p className="text-slate-400 text-sm">
+                      <a href="tel:+923223624954" className="hover:text-purple-400 transition-colors">
+                        +92 322 3624954
+                      </a>
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-6 p-6 rounded-3xl bg-slate-800/50 border border-slate-700/50">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white shrink-0">
+                <div className="flex items-start space-x-4 p-5 rounded-2xl bg-slate-800/50 border border-slate-700/50">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white shrink-0">
                     <Clock className="w-8 h-8" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-white">Working Hours</h3>
-                    <p className="text-slate-400 text-lg">Monday - Saturday: 9:00 AM - 7:00 PM</p>
+                    <h3 className="text-base font-bold mb-1 text-white">Working Hours</h3>
+                    <p className="text-slate-400 text-sm">Monday - Saturday: 9:00 AM - 7:00 PM</p>
                   </div>
                 </div>
               </div>
@@ -127,50 +135,50 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="bg-gradient-to-br from-slate-800/70 to-slate-900/70 border border-slate-700/50 rounded-3xl p-10 backdrop-blur-xl">
                 <div className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-lg font-semibold mb-3 text-white">Name</label>
+                    <label htmlFor="name" className="block text-sm font-semibold mb-2 text-white">Name</label>
                     <input
                       type="text"
                       id="name"
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-6 py-4 rounded-2xl bg-slate-700/50 border border-slate-600 focus:border-purple-500 focus:ring-4 focus:ring-purple-500/20 outline-none transition-all text-white"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-700/50 border border-slate-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 outline-none transition-all text-white text-sm"
                       placeholder="Your name"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-lg font-semibold mb-3 text-white">Phone Number</label>
+                    <label htmlFor="phone" className="block text-sm font-semibold mb-2 text-white">Phone Number</label>
                     <input
                       type="tel"
                       id="phone"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-6 py-4 rounded-2xl bg-slate-700/50 border border-slate-600 focus:border-purple-500 focus:ring-4 focus:ring-purple-500/20 outline-none transition-all text-white"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-700/50 border border-slate-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 outline-none transition-all text-white text-sm"
                       placeholder="Your phone number"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-lg font-semibold mb-3 text-white">Email</label>
+                    <label htmlFor="email" className="block text-sm font-semibold mb-2 text-white">Email</label>
                     <input
                       type="email"
                       id="email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-6 py-4 rounded-2xl bg-slate-700/50 border border-slate-600 focus:border-purple-500 focus:ring-4 focus:ring-purple-500/20 outline-none transition-all text-white"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-700/50 border border-slate-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 outline-none transition-all text-white text-sm"
                       placeholder="your@email.com"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="mirrorType" className="block text-lg font-semibold mb-3 text-white">Mirror Type (Optional)</label>
+                    <label htmlFor="mirrorType" className="block text-sm font-semibold mb-2 text-white">Mirror Type (Optional)</label>
                     <select
                       id="mirrorType"
                       value={formData.mirrorType}
                       onChange={(e) => setFormData({ ...formData, mirrorType: e.target.value })}
-                      className="w-full px-6 py-4 rounded-2xl bg-slate-700/50 border border-slate-600 focus:border-purple-500 focus:ring-4 focus:ring-purple-500/20 outline-none transition-all text-white"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-700/50 border border-slate-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 outline-none transition-all text-white text-sm"
                     >
                       <option value="">Select mirror type</option>
                       <option value="wall">Wall Mirror</option>
@@ -183,14 +191,14 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-lg font-semibold mb-3 text-white">Message</label>
+                    <label htmlFor="message" className="block text-sm font-semibold mb-2 text-white">Message</label>
                     <textarea
                       id="message"
                       required
-                      rows={6}
+                      rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full px-6 py-4 rounded-2xl bg-slate-700/50 border border-slate-600 focus:border-purple-500 focus:ring-4 focus:ring-purple-500/20 outline-none transition-all resize-none text-white"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-700/50 border border-slate-600 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 outline-none transition-all resize-none text-white text-sm"
                       placeholder="Tell us about your requirements..."
                     ></textarea>
                   </div>
@@ -200,7 +208,7 @@ export default function Contact() {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-5 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-2xl font-black text-xl text-white hover:opacity-90 transition-all disabled:opacity-50 shadow-xl shadow-purple-600/40"
+                    className="w-full py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-2xl font-black text-base text-white hover:opacity-90 transition-all disabled:opacity-50 shadow-xl shadow-purple-600/40"
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                   </motion.button>

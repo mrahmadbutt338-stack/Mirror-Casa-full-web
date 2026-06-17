@@ -42,42 +42,42 @@ const mirrorImages = [
 const mirrorCards = [
   {
     id: 1,
-    url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=3D%20decorative%20golden%20geometric%20mirror%20luxury%20home%20decor%20high%20quality&image_size=square_hd',
+    url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=3D decorative golden geometric mirror luxury home decor high quality&image_size=square_hd',
     name: 'Golden Geometric Mirror',
     price: 'PKR 15,000',
     tag: 'Best Seller'
   },
   {
     id: 2,
-    url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%203D%20round%20mirror%20with%20decorative%20frame%20luxury%20interior&image_size=square_hd',
+    url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern 3D round mirror with decorative frame luxury interior&image_size=square_hd',
     name: 'Modern Round Mirror',
     price: 'PKR 12,500',
     tag: 'New'
   },
   {
     id: 3,
-    url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=vintage%203D%20ornate%20mirror%20antique%20style%20luxury%20decor&image_size=square_hd',
+    url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=vintage 3D ornate mirror antique style luxury decor&image_size=square_hd',
     name: 'Vintage Ornate Mirror',
     price: 'PKR 20,000',
     tag: 'Premium'
   },
   {
     id: 4,
-    url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=sunburst%203D%20decorative%20mirror%20artistic%20design%20luxury&image_size=square_hd',
+    url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=sunburst 3D decorative mirror artistic design luxury&image_size=square_hd',
     name: 'Sunburst Art Mirror',
     price: 'PKR 18,000',
     tag: 'Popular'
   },
   {
     id: 5,
-    url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=LED%20backlit%203D%20vanity%20mirror%20smart%20modern%20bathroom&image_size=square_hd',
+    url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=LED backlit 3D vanity mirror smart modern bathroom&image_size=square_hd',
     name: 'Smart LED Vanity',
     price: 'PKR 25,000',
     tag: 'Trending'
   },
   {
     id: 6,
-    url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=hexagonal%203D%20mirror%20set%20modern%20wall%20decor%20luxury&image_size=square_hd',
+    url: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=hexagonal 3D mirror set modern wall decor luxury&image_size=square_hd',
     name: 'Hexagon Mirror Set',
     price: 'PKR 22,000',
     tag: 'Exclusive'
@@ -85,10 +85,10 @@ const mirrorCards = [
 ];
 
 const features = [
-  { icon: <Sparkles className="w-8 h-8" />, title: 'Premium Quality', desc: 'Only the finest materials used for every mirror' },
-  { icon: <Zap className="w-8 h-8" />, title: 'Quick Installation', desc: 'Fast and efficient service by experts' },
-  { icon: <Shield className="w-8 h-8" />, title: '1 Year Warranty', desc: 'Complete peace of mind on all products' },
-  { icon: <Award className="w-8 h-8" />, title: 'Expert Team', desc: '10+ years of experience in mirror industry' },
+  { icon: <Sparkles className="w-7 h-7" />, title: 'Premium Quality', desc: 'Only the finest materials used for every mirror' },
+  { icon: <Zap className="w-7 h-7" />, title: 'Quick Installation', desc: 'Fast and efficient service by experts' },
+  { icon: <Shield className="w-7 h-7" />, title: '1 Year Warranty', desc: 'Complete peace of mind on all products' },
+  { icon: <Award className="w-7 h-7" />, title: 'Expert Team', desc: '10+ years of experience in mirror industry' },
 ];
 
 const testimonials = [
@@ -99,8 +99,15 @@ const testimonials = [
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const timeoutRef = useRef<NodeJS.Timeout>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+  };
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % mirrorImages.length);
@@ -108,14 +115,6 @@ export default function Home() {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + mirrorImages.length) % mirrorImages.length);
-  };
-
-  const nextCard = () => {
-    setCurrentCardIndex((prev) => (prev + 1) % mirrorCards.length);
-  };
-
-  const prevCard = () => {
-    setCurrentCardIndex((prev) => (prev - 1 + mirrorCards.length) % mirrorCards.length);
   };
 
   useEffect(() => {
@@ -273,21 +272,25 @@ export default function Home() {
                 transition={{ duration: 0.9, delay: 1.3 }}
                 className="flex flex-col sm:flex-row gap-4 mt-12"
               >
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-10 py-4 bg-linear-to-r from-purple-600 via-pink-600 to-blue-600 rounded-full font-black text-lg text-white shadow-2xl shadow-purple-600/40 hover:shadow-purple-600/60 transition-all flex items-center justify-center gap-2"
-                >
-                  Get Free Quote
-                  <ArrowRight className="w-5 h-5" />
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-10 py-4 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-full font-bold text-lg text-slate-200 hover:bg-slate-700/60 transition-all"
-                >
-                  View Gallery
-                </motion.button>
+                <Link href="/contact" className="block">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-8 py-3.5 bg-linear-to-r from-purple-600 via-pink-600 to-blue-600 rounded-full font-black text-base text-white shadow-2xl shadow-purple-600/40 hover:shadow-purple-600/60 transition-all flex items-center justify-center gap-2 w-full sm:w-auto"
+                  >
+                    Get Free Quote
+                    <ArrowRight className="w-4.5 h-4.5" />
+                  </motion.button>
+                </Link>
+                <Link href="/gallery" className="block">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="px-8 py-3.5 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-full font-bold text-base text-slate-200 hover:bg-slate-700/60 transition-all w-full sm:w-auto"
+                  >
+                    View Gallery
+                  </motion.button>
+                </Link>
               </motion.div>
             </motion.div>
           </div>
@@ -307,14 +310,14 @@ export default function Home() {
       </section>
 
       {/* 3D Mirror Cards Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/30">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900/30">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-10"
           >
             <h2 className="text-4xl md:text-5xl font-black mb-4 bg-linear-to-r from-purple-300 via-pink-300 to-blue-300 bg-clip-text text-transparent">
               Our Premium Mirror Collection
@@ -324,69 +327,39 @@ export default function Home() {
 
           {/* 3D Mirror Cards Carousel */}
           <div className="relative">
-            {/* Navigation Buttons */}
-            <button
-              onClick={prevCard}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full bg-slate-900/70 backdrop-blur-sm text-white hover:bg-purple-600/80 transition-all shadow-xl"
-            >
-              <ChevronLeft className="w-8 h-8" />
-            </button>
-            <button
-              onClick={nextCard}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-30 p-4 rounded-full bg-slate-900/70 backdrop-blur-sm text-white hover:bg-purple-600/80 transition-all shadow-xl"
-            >
-              <ChevronRight className="w-8 h-8" />
-            </button>
-
             {/* Cards Container */}
-            <div className="flex items-center justify-center min-h-125">
-              <AnimatePresence mode="wait">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 justify-items-center">
+              {mirrorCards.map((card, index) => (
                 <motion.div
-                  key={currentCardIndex}
-                  initial={{ opacity: 0, scale: 0.8, rotateY: -30 }}
-                  animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                  exit={{ opacity: 0, scale: 0.8, rotateY: 30 }}
-                  transition={{ duration: 1.2, type: 'spring', stiffness: 80, damping: 12 }}
-                  className="flex gap-6 flex-wrap justify-center"
+                  key={card.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ 
+                    y: -8,
+                    scale: 1.02,
+                    boxShadow: '0 20px 40px -10px rgba(168, 85, 247, 0.35), 0 0 25px 2px rgba(168, 85, 247, 0.2)'
+                  }}
+                  onMouseMove={handleMouseMove}
+                  className="relative group w-full max-w-sm overflow-hidden rounded-3xl cursor-pointer"
                 >
-                  {mirrorCards.map((card, index) => (
-                    <motion.div
-                      key={card.id}
-                      initial={{ opacity: 0, y: 50 }}
-                      animate={{ 
-                        opacity: 1, 
-                        y: 0,
-                        rotateY: index === currentCardIndex ? 0 : index < currentCardIndex ? -20 : 20,
-                        scale: index === currentCardIndex ? 1 : 0.85,
-                        zIndex: index === currentCardIndex ? 20 : 10
-                      }}
-                      transition={{ duration: 0.9, delay: index * 0.12, type: 'spring', stiffness: 100, damping: 10 }}
-                      whileHover={{ 
-                        scale: 1.05, 
-                        rotateY: 0,
-                        zIndex: 30,
-                        boxShadow: '0 30px 60px -15px rgba(168, 85, 247, 0.6)'
-                      }}
-                      className="relative group w-72 shrink-0"
-                    >
-                      {/* Round Light Blink Animation */}
-                      <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-                      <motion.div
-                        className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-70"
-                        animate={{
-                          scale: [1, 1.05, 1],
-                          opacity: [0.3, 0.7, 0.3],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: 'easeInOut',
-                        }}
-                      />
-                      
-                      {/* Card Content */}
-                      <div className="relative bg-linear-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 backdrop-blur-xl rounded-3xl p-0.5">
-                        <div className="bg-slate-900 rounded-3xl overflow-hidden">
+                  {/* Soft Glowing Light Border/Aura on Hover */}
+                  <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-40 transition-opacity duration-300 blur-md" />
+                  <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                  
+                  {/* Firefly glowing light follows cursor */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-3xl z-10"
+                    style={{
+                      background: 'radial-gradient(circle 100px at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(168, 85, 247, 0.25), rgba(59, 130, 246, 0.15), transparent 80%)'
+                    }}
+                  />
+                  
+                  {/* Card Content */}
+                  <div className="relative bg-linear-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 backdrop-blur-xl rounded-3xl p-0.5 h-full z-20">
+                    <div className="bg-slate-900 rounded-3xl overflow-hidden h-full flex flex-col justify-between">
+                      <div>
                         {/* Tag */}
                         <div className="absolute top-4 left-4 z-10">
                           <span className="px-3 py-1 rounded-full bg-linear-to-r from-purple-600 to-pink-600 text-white text-xs font-bold shadow-lg">
@@ -395,36 +368,51 @@ export default function Home() {
                         </div>
                         
                         {/* Mirror Image */}
-                        <div className="relative w-full h-72">
+                        <div className="relative w-full h-64">
                           <Image
                             src={card.url}
                             alt={card.name}
                             fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
                             unoptimized
                           />
                           <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-transparent to-transparent" />
                         </div>
 
                         {/* Card Details */}
-                          <div className="p-6">
-                            <h3 className="text-xl font-black text-white mb-2">
-                              {card.name}
-                            </h3>
-                            <p className="text-2xl font-bold bg-linear-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-4">
-                              {card.price}
-                            </p>
-                            <button className="w-full py-3 bg-linear-to-r from-purple-600 via-pink-600 to-blue-600 rounded-xl font-bold text-white hover:shadow-2xl hover:shadow-purple-600/40 transition-all transform hover:-translate-y-1">
-                              Shop Now
-                            </button>
-                          </div>
+                        <div className="p-5">
+                          <h3 className="text-xl font-black text-white mb-1.5 font-sans">
+                            {card.name}
+                          </h3>
+                          <p className="text-2xl font-black bg-linear-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-3">
+                            {card.price}
+                          </p>
                         </div>
                       </div>
-                    </motion.div>
-                  ))}
+                      
+                      <div className="px-5 pb-5 flex flex-col gap-2.5">
+                        <div className="relative z-40">
+                          <button className="w-full py-3.5 bg-linear-to-r from-purple-600 via-pink-600 to-blue-600 rounded-xl font-bold text-white shadow-lg shadow-purple-600/20 hover:shadow-xl hover:shadow-purple-600/40 transition-all cursor-pointer">
+                            Buy Now
+                          </button>
+                        </div>
+                        <Link
+                          href={`/products/${card.id}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="relative z-40 text-center text-slate-400 hover:text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2 group/view"
+                        >
+                          View Details
+                          <svg className="w-3.5 h-3.5 transition-transform group-hover/view:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </motion.div>
-              </AnimatePresence>
+              ))}
             </div>
+          </div>
             
             {/* Explore More Button */}
             <div className="mt-12 text-center">
@@ -432,26 +420,25 @@ export default function Home() {
                 <motion.button
                   whileHover={{ scale: 1.08, boxShadow: '0 20px 40px -10px rgba(168, 85, 247, 0.5)' }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-10 py-4 bg-linear-to-r from-purple-600 via-pink-600 to-blue-600 rounded-full font-black text-lg text-white shadow-2xl shadow-purple-600/40 hover:shadow-purple-600/60 transition-all flex items-center justify-center gap-3 mx-auto"
+                  className="px-8 py-3.5 bg-linear-to-r from-purple-600 via-pink-600 to-blue-600 rounded-full font-black text-base text-white shadow-2xl shadow-purple-600/40 hover:shadow-purple-600/60 transition-all flex items-center justify-center gap-3 mx-auto"
                 >
                   Explore More
-                  <ArrowRight className="w-6 h-6" />
+                  <ArrowRight className="w-5 h-5" />
                 </motion.button>
               </Link>
             </div>
           </div>
-        </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8">
+      <section className="py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-10"
           >
             <h2 className="text-4xl md:text-5xl font-black mb-4 bg-linear-to-r from-purple-300 via-pink-300 to-blue-300 bg-clip-text text-transparent">
               Why Choose Us
@@ -467,31 +454,35 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.15, duration: 0.9, type: "spring", stiffness: 90, damping: 12 }}
-                whileHover={{ y: -12, scale: 1.05 }}
-                className="relative group"
+                whileHover={{ 
+                  y: -8,
+                  scale: 1.02,
+                  boxShadow: '0 20px 40px -10px rgba(168, 85, 247, 0.35), 0 0 25px 2px rgba(168, 85, 247, 0.2)'
+                }}
+                onMouseMove={handleMouseMove}
+                className="relative group overflow-hidden rounded-3xl"
               >
-                {/* Round Light Blink Animation */}
-                <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-                <motion.div
-                  className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-70"
-                  animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0.3, 0.7, 0.3],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
+                {/* Soft Glowing Light Border/Aura on Hover */}
+                <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-40 transition-opacity duration-300 blur-md" />
+                <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                
+                {/* Firefly glowing light follows cursor */}
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-3xl z-10"
+                  style={{
+                    background: 'radial-gradient(circle 100px at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(168, 85, 247, 0.25), rgba(59, 130, 246, 0.15), transparent 80%)'
                   }}
                 />
                 
-                <div className="relative bg-linear-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 backdrop-blur-xl rounded-3xl p-0.5">
-                  <div className="bg-slate-900 rounded-3xl p-8">
-                    <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-purple-500 via-pink-500 to-blue-500 flex items-center justify-center text-white mb-6 shadow-xl shadow-purple-500/30">
-                      {feature.icon}
+                <div className="relative bg-linear-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 backdrop-blur-xl rounded-3xl p-0.5 h-full z-20">
+                  <div className="bg-slate-900 rounded-3xl p-6 h-full flex flex-col justify-between">
+                    <div>
+                      <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-purple-500 via-pink-500 to-blue-500 flex items-center justify-center text-white mb-4 shadow-xl shadow-purple-500/30">
+                        {feature.icon}
+                      </div>
+                      <h3 className="text-lg font-black mb-2 text-white">{feature.title}</h3>
+                      <p className="text-slate-400 leading-relaxed text-sm">{feature.desc}</p>
                     </div>
-                    <h3 className="text-xl font-black mb-3 text-white">{feature.title}</h3>
-                    <p className="text-slate-400 leading-relaxed">{feature.desc}</p>
                   </div>
                 </div>
               </motion.div>
@@ -501,7 +492,7 @@ export default function Home() {
       </section>
 
       {/* NEW AWESOME SECTION: THE BEST MIRROR COMPANY */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-slate-900/30 via-purple-950/10 to-slate-900/30">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-slate-900/30 via-purple-950/10 to-slate-900/30">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* LEFT: HEADING AND DESCRIPTION */}
@@ -621,26 +612,7 @@ export default function Home() {
                       </svg>
                     </motion.div>
 
-                    {/* LOGO IN CORNER WITH MC ANIMATION */}
-                    <motion.div
-                      animate={{
-                        rotate: [0, 360],
-                        y: [0, -5, 0, 5, 0],
-                      }}
-                      transition={{
-                        rotate: { duration: 20, repeat: Infinity, ease: 'linear' },
-                        y: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
-                      }}
-                      className="absolute top-4 left-4 bg-linear-to-br from-blue-600 via-blue-500 to-blue-700 rounded-2xl p-2 shadow-xl border border-blue-400/70"
-                    >
-                      <img
-                        src="/logo.png"
-                        alt="Logo"
-                        width={60}
-                        height={60}
-                        className="object-contain"
-                      />
-                    </motion.div>
+
 
                     <h3 className="text-2xl font-black text-white mb-2">Luxury Diamond Mirror</h3>
                     <p className="text-slate-300 text-center mb-8">Premium Quality • Timeless Design</p>
@@ -719,14 +691,14 @@ export default function Home() {
       </section>
 
       {/* Our Work Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/30">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900/30">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-10"
           >
             <h2 className="text-4xl md:text-5xl font-black mb-4 bg-linear-to-r from-purple-300 via-pink-300 to-blue-300 bg-clip-text text-transparent">
               Our Work
@@ -753,43 +725,47 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.7 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="relative group cursor-pointer"
+                whileHover={{ 
+                  y: -8,
+                  scale: 1.02,
+                  boxShadow: '0 20px 40px -10px rgba(168, 85, 247, 0.35), 0 0 25px 2px rgba(168, 85, 247, 0.2)'
+                }}
+                onMouseMove={handleMouseMove}
+                className="relative group cursor-pointer overflow-hidden rounded-3xl"
               >
-                {/* Round Light Blink Animation */}
-                <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-                <motion.div
-                  className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-70"
-                  animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0.3, 0.7, 0.3],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
+                {/* Soft Glowing Light Border/Aura on Hover */}
+                <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-40 transition-opacity duration-300 blur-md" />
+                <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                
+                {/* Firefly glowing light follows cursor */}
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-3xl z-10"
+                  style={{
+                    background: 'radial-gradient(circle 120px at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(168, 85, 247, 0.25), rgba(59, 130, 246, 0.15), transparent 80%)'
                   }}
                 />
                 
-                <div className="relative bg-linear-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 backdrop-blur-xl rounded-3xl p-0.5">
-                  <div className="bg-slate-900 rounded-3xl overflow-hidden">
-                    <div className="relative w-full h-80">
-                      <video
-                        className="w-full h-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                      >
-                        <source src={work.video} type="video/mp4" />
-                      </video>
-                      <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/60 to-transparent" />
-                    </div>
-                    <div className="p-8">
-                      <span className="inline-block px-3 py-1 rounded-full bg-purple-600/80 text-white text-xs font-bold mb-3">
-                        {work.category}
-                      </span>
-                      <h3 className="text-2xl font-black text-white">{work.title}</h3>
+                <div className="relative bg-linear-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 backdrop-blur-xl rounded-3xl p-0.5 z-20 h-full">
+                  <div className="bg-slate-900 rounded-3xl overflow-hidden h-full flex flex-col justify-between">
+                    <div>
+                      <div className="relative w-full h-64 md:h-56">
+                        <video
+                          className="w-full h-full object-cover"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                        >
+                          <source src={work.video} type="video/mp4" />
+                        </video>
+                        <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/60 to-transparent" />
+                      </div>
+                      <div className="p-6">
+                        <span className="inline-block px-3 py-1 rounded-full bg-purple-600/80 text-white text-xs font-bold mb-3">
+                          {work.category}
+                        </span>
+                        <h3 className="text-xl font-black text-white">{work.title}</h3>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -800,14 +776,14 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/30">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-slate-900/30">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-10"
           >
             <h2 className="text-4xl md:text-5xl font-black mb-4 bg-linear-to-r from-purple-300 via-pink-300 to-blue-300 bg-clip-text text-transparent">
               What Our Customers Say
@@ -823,33 +799,37 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.15, duration: 0.9, type: "spring", stiffness: 90, damping: 12 }}
-                whileHover={{ y: -12, scale: 1.02 }}
-                className="relative group"
+                whileHover={{ 
+                  y: -8,
+                  scale: 1.02,
+                  boxShadow: '0 20px 40px -10px rgba(168, 85, 247, 0.35), 0 0 25px 2px rgba(168, 85, 247, 0.2)'
+                }}
+                onMouseMove={handleMouseMove}
+                className="relative group overflow-hidden rounded-3xl"
               >
-                {/* Round Light Blink Animation */}
-                <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-                <motion.div
-                  className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-70"
-                  animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0.3, 0.7, 0.3],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
+                {/* Soft Glowing Light Border/Aura on Hover */}
+                <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-40 transition-opacity duration-300 blur-md" />
+                <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                
+                {/* Firefly glowing light follows cursor */}
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-3xl z-10"
+                  style={{
+                    background: 'radial-gradient(circle 100px at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(168, 85, 247, 0.25), rgba(59, 130, 246, 0.15), transparent 80%)'
                   }}
                 />
                 
-                <div className="relative bg-linear-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 backdrop-blur-xl rounded-3xl p-0.5">
-                  <div className="bg-slate-900 rounded-3xl p-8">
-                    <div className="flex gap-1 mb-5">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                      ))}
+                <div className="relative bg-linear-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 backdrop-blur-xl rounded-3xl p-0.5 h-full z-20">
+                  <div className="bg-slate-900 rounded-3xl p-8 h-full flex flex-col justify-between">
+                    <div>
+                      <div className="flex gap-1 mb-5">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                        ))}
+                      </div>
+                      <p className="text-slate-300 mb-6 italic text-lg leading-relaxed">{testimonial.text}</p>
+                      <div className="font-black text-white text-lg">{testimonial.name}</div>
                     </div>
-                    <p className="text-slate-300 mb-6 italic text-lg leading-relaxed">{testimonial.text}</p>
-                    <div className="font-black text-white text-lg">{testimonial.name}</div>
                   </div>
                 </div>
               </motion.div>
@@ -859,7 +839,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-purple-900/40 via-pink-900/30 to-blue-900/40">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-linear-to-br from-purple-900/40 via-pink-900/30 to-blue-900/40">
         <div className="max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -873,14 +853,16 @@ export default function Home() {
             <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
               Get in touch with us today for a free consultation and quote. Let us make your vision a reality!
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-12 py-5 bg-linear-to-r from-purple-600 via-pink-600 to-blue-600 rounded-full font-black text-xl text-white shadow-2xl shadow-purple-600/50 hover:shadow-purple-600/70 transition-all flex items-center justify-center gap-3 mx-auto"
-            >
-              Contact Us Now
-              <ArrowRight className="w-6 h-6" />
-            </motion.button>
+            <Link href="/contact" className="inline-block mx-auto">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-12 py-5 bg-linear-to-r from-purple-600 via-pink-600 to-blue-600 rounded-full font-black text-xl text-white shadow-2xl shadow-purple-600/50 hover:shadow-purple-600/70 transition-all flex items-center justify-center gap-3 cursor-pointer"
+              >
+                Contact Us Now
+                <ArrowRight className="w-6 h-6" />
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
       </section>

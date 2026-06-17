@@ -41,6 +41,14 @@ export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedVideo, setSelectedVideo] = useState<typeof galleryItems[0] | null>(null);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   const filteredItems = activeCategory === 'All'
     ? galleryItems
     : galleryItems.filter(item => item.category === activeCategory);
@@ -89,34 +97,37 @@ export default function Gallery() {
             {filteredItems.map((item, index) => (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.15, duration: 0.9, type: "spring", stiffness: 90, damping: 12 }}
-                className="relative group"
+                transition={{ delay: index * 0.15, duration: 0.7 }}
+                whileHover={{ 
+                  y: -8,
+                  scale: 1.02,
+                  boxShadow: '0 20px 40px -10px rgba(168, 85, 247, 0.35), 0 0 25px 2px rgba(168, 85, 247, 0.2)'
+                }}
+                onMouseMove={handleMouseMove}
+                className="relative group w-full overflow-hidden rounded-3xl"
               >
-                {/* Round Light Blink Animation */}
-                <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-                <motion.div
-                  className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-70"
-                  animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0.3, 0.7, 0.3],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
+                {/* Soft Glowing Light Border/Aura on Hover */}
+                <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-40 transition-opacity duration-300 blur-md" />
+                <div className="absolute -inset-0.5 rounded-3xl bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                
+                {/* Firefly glowing light follows cursor */}
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-3xl z-10"
+                  style={{
+                    background: 'radial-gradient(circle 100px at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(168, 85, 247, 0.25), rgba(59, 130, 246, 0.15), transparent 80%)'
                   }}
                 />
                 
-                <div className="relative bg-linear-to-br from-slate-800/70 to-slate-900/70 border border-slate-700/50 backdrop-blur-xl rounded-3xl p-0.5">
-                  <div className="flex flex-col md:flex-row gap-8 items-center bg-slate-900 rounded-3xl p-8">
+                <div className="relative bg-linear-to-br from-slate-800/80 to-slate-900/80 border border-slate-700/50 backdrop-blur-xl rounded-3xl p-0.5 h-full z-20">
+                  <div className="flex flex-col md:flex-row gap-6 items-center bg-slate-900 rounded-3xl p-6">
                     {/* Left Side - Video */}
-                    <div className="shrink-0">
+                    <div className="shrink-0 w-full md:w-auto">
                       <motion.div
-                        whileHover={{ scale: 1.08 }}
-                        className="relative rounded-2xl overflow-hidden border border-slate-700 w-full md:w-80 h-64 cursor-pointer group/video"
+                        whileHover={{ scale: 1.05 }}
+                        className="relative rounded-2xl overflow-hidden border border-slate-700 w-full md:w-60 h-44 cursor-pointer group/video"
                         onClick={() => setSelectedVideo(item)}
                       >
                         <video
@@ -130,9 +141,9 @@ export default function Gallery() {
                         <div className="absolute inset-0 bg-linear-to-t from-slate-950/80 to-transparent flex items-center justify-center z-20">
                           <motion.div
                             whileHover={{ scale: 1.1 }}
-                            className="w-16 h-16 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center shadow-xl"
+                            className="w-14 h-14 bg-linear-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center shadow-xl"
                           >
-                            <Play className="w-8 h-8 text-white ml-1" />
+                            <Play className="w-6 h-6 text-white ml-0.5" />
                           </motion.div>
                         </div>
                       </motion.div>
@@ -143,8 +154,8 @@ export default function Gallery() {
                       <span className="inline-block px-3 py-1 rounded-full bg-purple-600/80 text-white text-xs font-bold mb-3">
                         {item.category}
                       </span>
-                      <h2 className="text-2xl md:text-3xl font-black text-white mb-3">{item.title}</h2>
-                      <p className="text-slate-400 text-lg leading-relaxed">{item.description}</p>
+                      <h2 className="text-xl md:text-2xl font-black text-white mb-2.5">{item.title}</h2>
+                      <p className="text-slate-400 text-base leading-relaxed">{item.description}</p>
                     </div>
                   </div>
                 </div>
