@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import dbConnect from '@/lib/dbConnect';
+import Contact from '@/lib/models/Contact';
 
 export async function POST(request: Request) {
   try {
@@ -12,6 +14,21 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // Connect to MongoDB and save contact
+    await dbConnect();
+    const ipAddress = request.headers.get('x-forwarded-for') || '';
+    
+    const newContact = new Contact({
+      name,
+      email,
+      phone: phone || '',
+      mirrorType: mirrorType || '',
+      message,
+      ipAddress,
+    });
+    
+    await newContact.save();
 
     // Setup Nodemailer transporter
     const transporter = nodemailer.createTransport({
