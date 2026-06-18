@@ -119,7 +119,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error('Error processing contact form:', error);
     return NextResponse.json(
-      { success: false, message: 'Failed to process request' },
+      { success: false, message: 'Failed to process request: ' + (error instanceof Error ? error.message : String(error)) },
       { status: 500 }
     );
   }
